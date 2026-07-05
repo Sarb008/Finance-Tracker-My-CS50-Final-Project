@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block body %}
+    <div class="main_content">
+        <header>
+            <h1 id="project_n">Project X</h1>
+            <a href="#" id="switch_project">Switch Project</a>
+        </header>
+        <div class="main">
+            <div class="main-left">
+                <div class="cards">
+                    <div class="card capital">
+                        <h3>Net Capital</h3>
+                        <p>₹{{ net_capital }}</p>
+                    </div>
+                    <div class="card expense">
+                        <h3>Expenses</h3>
+                        <p>₹{{ expense }}</p>
+                    </div>
+                    <div class="card receipt">
+                        <h3>Receipts</h3>
+                        <p>₹{{ income }}</p>
+                    </div>
+                    <div class="card tcapital">
+                        <h3>Target Capital</h3>
+                        <p>₹{{ target_capital }}</p>
+                    </div>
+                </div>
+                <div class="charts">
+                    <canvas id="netCapitalChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            <div class="transactions">
+                <h4>Transactions</h4>
+                <div class="date_container">
+                    <input type="date" id="date_picker">
+                    <p id="date_text" onclick="document.getElementById('date_picker').showPicker();"></p>
+                    <img src="/static/icons/calender_icon.png" alt="Pick a date" onclick="document.getElementById('date_picker').showPicker();" id="calender_icon">
+                </div>
+                <div class="search">
+                    <input type="search" id="search_trans">
+                    <img src="/static/icons/search icon.svg" alt="search_icon" id="search_icon">
+                    <button id="clear_filters">Clear Filters</button>
+                </div>
+                <div class="table_container">
+                    {% if transactions %}
+                        <table id="trans_table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in transactions %}
+                                    <tr>
+                                        <td>{{ transaction.name }}</td>
+                                        <td>{{ transaction.date }}</td>
+                                        <td>
+                                            {% if transaction.type == "expense" %}
+                                                <span style="color: #e63946;">-₹{{ "%.2f"|format(transaction.amount) }}</span>
+                                            {% else %}
+                                                <span style="color: #2a9d8f;">+₹{{ "%.2f"|format(transaction.amount) }}</span>
+                                            {% endif %}
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="no-data">
+                            <img src="/static/icons/nf_icon.png" alt="No transactions" class="nf_icon">
+                            <h3>No transactions found</h3>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const chartLabels = {{ months | tojson }};
+        const chartData = {{ values | tojson }};
+    </script>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

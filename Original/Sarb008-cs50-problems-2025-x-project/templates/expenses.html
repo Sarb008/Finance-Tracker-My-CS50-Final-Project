@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Expenses
+{% endblock %}
+
+{% block body %}
+    <div class="main_content">
+        <header class="exp_header">
+            <h2 id="project_n">Expenses</h2>
+            <button id="add_exp_btn">+ Add Expense</button>
+        </header>
+        <div class="expenses_section">
+            <div class="filter_bar">
+                <input type="search" id="exp_search" placeholder="Search expenses...">
+
+                <select id="filter_category">
+                    <option value="">All Categories</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Shipping">Shipping</option>
+                </select>
+
+                <input type="date" id="filter_date">
+            </div>
+            <div id="controls" style="margin-bottom: 20px;">
+                <label>Sort By: </label>
+                <select id="sortSelect">
+                    <option value="date">Date</option>
+                    <option value="title">Title</option>
+                    <option value="category">Category</option>
+                    <option value="amount">Amount</option>
+                </select>
+
+                <label style="margin-left: 20px;">Filter Category: </label>
+                <select id="filterCategory">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="table_container">
+                <table id="exp_table">
+                    <thead>
+                        <tr>
+                            <th>Expense Name</th>
+                            <th>Date</th>
+                            <th>Amount (₹)</th>
+                            <th>Category</th>
+                            <th>Payment Method</th>
+                            <th>Vendor</th>
+                            <th>Notes</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="addExpenseModal" class="modal">
+            <div class="modal_content">
+                <h3>Add New Expense</h3>
+                <form id="add_exp_form">
+
+                    <label>Expense Name</label>
+                    <input type="text" id="exp_name" required>
+
+                    <label>Date</label>
+                    <input type="date" id="exp_date" required>
+
+                    <label>Amount (₹)</label>
+                    <input type="number" id="exp_amount" required>
+
+                    <label>Category</label>
+                    <select id="exp_category" required>
+                        <option value="">Select Category</option>
+                        <option value="Hardware">Hardware</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Shipping">Shipping</option>
+                    </select>
+
+                    <label>Payment Method</label>
+                    <select id="exp_method" required>
+                        <option value="">Select Method</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Credit">Credit</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                    </select>
+
+                    <label>Vendor</label>
+                    <input type="text" id="exp_vendor" required>
+
+                    <label>Notes (optional)</label>
+                    <textarea id="exp_notes" rows="3"></textarea>
+
+                    <div class="modal_actions">
+                        <button type="submit" id="save_exp_btn">Save</button>
+                        <button type="button" id="cancel_btn">Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/expenses.js') }}"></script>
+
+{% endblock %}

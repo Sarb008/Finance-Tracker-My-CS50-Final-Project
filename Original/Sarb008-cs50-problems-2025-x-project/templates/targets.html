@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Targets
+{% endblock %}
+
+{% block body %}
+    <div class="main_content">
+        <header class="exp_header">
+            <h2 id="project_n">Targets</h2>
+            <button id="edit_targets_btn">Edit Targets</button>
+        </header>
+        <div class="expenses_section">
+            <div class="targets_cards" style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+                <div class="target_card" id="card_net">
+                    <h4>Target Net Capital</h4>
+                    <div class="target_value" id="target_net_value">₹0</div>
+                    <div class="progress_wrap">
+                        <div class="progress_label"><span id="net_actual_text">Actual: ₹0</span><span id="net_pct_text"></span></div>
+                        <div class="progress_bar">
+                            <div id="net_progress" class="progress_fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="target_card" id="card_income">
+                    <h4>Monthly Income Target</h4>
+                    <div class="target_value" id="target_income_value">₹0</div>
+                    <div class="progress_wrap">
+                        <div class="progress_label"><span id="income_actual_text">Actual: ₹0</span><span id="income_pct_text"></span></div>
+                        <div class="progress_bar">
+                            <div id="income_progress" class="progress_fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="target_card" id="card_expense">
+                    <h4>Monthly Expense Limit</h4>
+                    <div class="target_value" id="target_expense_value">₹0</div>
+                    <div class="progress_wrap">
+                        <div class="progress_label"><span id="expense_actual_text">Actual: ₹0</span><span id="expense_pct_text"></span></div>
+                        <div class="progress_bar">
+                            <div id="expense_progress" class="progress_fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts_section" style="display:flex; gap:20px; flex-wrap:wrap;">
+                <div class="chart_card" style="flex:1; min-width:300px;">
+                    <h4>Monthly: Actual vs Target Income</h4>
+                    <canvas id="incomeBarChart" height="200"></canvas>
+                </div>
+
+                <div class="chart_card" style="flex:1; min-width:300px;">
+                    <h4>Monthly: Actual vs Target Expense</h4>
+                    <canvas id="expenseBarChart" height="200"></canvas>
+                </div>
+
+                <div class="chart_card" style="width:280px; min-width:260px;">
+                    <h4>Net Capital Health</h4>
+                    <canvas id="netDonutChart" height="200"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="editTargetsModal" class="modal">
+            <div class="modal_content">
+                <h3>Edit Targets</h3>
+                <form id="edit_targets_form">
+                    <label>Target Net Capital (₹)</label>
+                    <input type="number" id="inp_target_net" required>
+
+                    <label>Monthly Income Target (₹)</label>
+                    <input type="number" id="inp_target_income" required>
+
+                    <label>Monthly Expense Limit (₹)</label>
+                    <input type="number" id="inp_target_expense" required>
+
+                    <label>Optional: Starting Capital (₹)</label>
+                    <input type="number" id="inp_starting_capital" placeholder="0">
+
+                    <div class="modal_actions">
+                        <button type="submit" id="save_targets_btn">Save</button>
+                        <button type="button" id="cancel_targets_btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/targets.js') }}"></script>
+
+
+
+{% endblock %}

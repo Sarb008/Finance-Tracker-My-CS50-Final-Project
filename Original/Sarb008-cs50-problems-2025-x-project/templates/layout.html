@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/style.css">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <aside class="sidebar">
+                <div class="profile">
+                    <div class="avatar">
+                        <img src="/static/icons/avatar icon.png" alt="icon" class="dp_icon">
+                    </div>
+                    <h2>Sarbajeet Pattadar</h2>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="a_dashboard.html"><img src="/static/icons/home icon.svg" alt="home_icon" class="nav_icons"> Dashboard</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="expenses.html"><img src="/static/icons/expense icon.svg" alt="expense_icon" class="nav_icons"> Expenses</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="receipts.html"><img src="/static/icons/receipt icon.svg" alt="receipt_icon" class="nav_icons"> Receipts</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="targets.html"><img src="/static/icons/target icon.svg" alt="target_icon" class="nav_icons"> Targets</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="settings.html"><img src="/static/icons/settings icon.svg" alt="settings_icon" class="nav_icons"> Settings</a></li>
+                    </ul>
+                </nav>
+                <div id="logout_container">
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </aside>
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+
+</html>
